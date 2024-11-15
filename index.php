@@ -86,6 +86,45 @@
             </div>
 
         </section>
+
+        <section id="how-it-works">
+            <div class="container">
+                <h2 class="section-heading text-center">
+                    How It Works
+                </h2>
+
+                <div class="row d-flex justify-content-center">
+
+                        <div class="d-flex flex-row align-items-center col-7 mb-3">
+                            <div class="image w-25">
+                                <img src="public/images/rb_3598.png" class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                <h3>Find events</h3>
+                                <p>Browse a variety of events tailored to your interests and location.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center col-7 mb-5">
+                            <div class="image w-25">
+                                <img src="public/images/rb_96.png" class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                <h3>Purchase tickets</h3>
+                                <p>Reserve your spot by purchasing tickets with just a few clicks.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center col-7 mb-5">
+                            <div class="image w-25">
+                                <img src="public/images/rb_1749.png" class="img-fluid" alt="">
+                            </div>
+                            <div>
+                                <h3>Get ready to go!</h3>
+                                <p>Receive confirmation and all the info you need to make most of your event.</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer></footer>
 
