@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/style.css">
 
 </head>
 
@@ -42,7 +43,18 @@
             </div>
         </nav>
     </header>
-    <main></main>
+    <main>
+        <section id="hero">
+            <div class="container" style="padding-top: 200px;">
+                <div class="row">
+                    <div class="col-10 col-md-10 col-lg-5">
+                        <h1 class="fw-bolder" style="color: white;">DISCOVER EVENTS. BUY TICKETS. ENJOY THE EXPERIENCE!</h1>
+                        <p class="lead" style="color: white;">Join the excitement! Browse upcoming events and reserve your spot today.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer></footer>
 
 

@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
+#hero{
+    height: 100vh;
+    background-image: url('../images/hero-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -100;
+}
