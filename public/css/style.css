@@ -1,11 +1,15 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-#hero{
+#hero {
     height: 100vh;
     background-image: url('../images/hero-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -100;
+}
+
+.white-text {
+    color: white;
 }

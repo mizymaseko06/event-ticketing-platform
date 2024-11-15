@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <img src="public/images/ticket-logo_9850-381.png" class="img-fluid" style="max-height: 40px" alt="">
@@ -36,8 +36,8 @@
                     </ul>
 
                     <div class="d-flex align-content-center">
-                        <p class="nav-item">My tickets</p>
-                        <p class="nav-item">E200.00</p>
+                        <p class="nav-item white-text">My tickets</p>
+                        <p class="nav-item white-text">E200.00</p>
                     </div>
                 </div>
             </div>
