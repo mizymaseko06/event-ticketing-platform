@@ -18,3 +18,12 @@
     font-weight: bold;
     margin: 50px 0 30px 0;
 }
+
+#site-map span a{
+    text-transform: none;
+    color: white;
+}
+
+.social-links{
+    height: 50px;
+}
