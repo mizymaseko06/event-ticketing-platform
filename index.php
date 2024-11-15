@@ -54,6 +54,38 @@
                 </div>
             </div>
         </section>
+        <section id="featured">
+            <div class="container">
+                <h2 class="section-heading text-center">
+                    Featured Events
+                </h2>
+                <div class="row justify-content-center">
+                    <?php
+                    for ($i = 0; $i < 6; $i++) {
+                    ?>
+                        <div class="card col-10 col-md-5 col-lg-3 m-1">
+                            <p class="card-header text-end" style="background-color: white;">Category</p>
+                            <img src="public/images/hero-background.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h6 class="card-title">Event</h6>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in consequuntur, tenetur nulla autem excepturi eius?</p>
+                                <div class="details d-flex align-items-end justify-content-between">
+                                    <div class="d-flex flex-column">
+                                        <span class="date">Sat, 30 Nov 2024, 16:00</span>
+                                        <span class="location">Somhlolo National Stadium</span>
+                                    </div>
+                                    <span class="price">E500.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+
+            </div>
+
+        </section>
     </main>
     <footer></footer>
 

@@ -13,3 +13,8 @@
 .white-text {
     color: white;
 }
+
+.section-heading{
+    font-weight: bold;
+    margin: 50px 0 30px 0;
+}
