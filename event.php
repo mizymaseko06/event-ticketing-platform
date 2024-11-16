@@ -14,7 +14,39 @@
 <body>
     <?php include "header.php"; ?>
     <main>
-        
+        <div class="container-fluid p-0" style="margin-top: 60px;">
+            <img src="public/images/hero-background.jpg" class="img-fluid w-100" style="object-fit: cover; height: 50vh;" alt="">
+        </div>
+        <div class="container-sm detailed-event">
+            <div class="row my-3">
+                <h5 class="fw-bolder">Event</h5>
+                <div class="d-flex flex-column justify-content-between mt-3">
+                    <div class="details d-flex align-items-end justify-content-between">
+                        <div class="d-flex flex-column">
+                            <div><i class="bi bi-calendar-event me-1"></i><span class="date" style="font-size: small;">Sat, 30 Nov 2024, 16:00</span></div>
+                            <div><i class="bi bi-geo me-1"></i><span class="location" style="font-size: small;">Somhlolo National Stadium</span></div>
+                        </div>
+                        <span class="price fw-bold fs-5" style="color: orange">E500.00</span>
+                    </div>
+                </div>
+                <div class="description mt-3">
+                    <h5>Desciption</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas quod aliquam magni iste adipisci consequuntur laudantium! Architecto, harum doloribus est id impedit ut at veniam culpa, enim voluptatem amet iste illum consequatur.</p>
+                </div>
+
+
+                <div class="quantities d-flex flex-column align-items-center">
+                    <div class="">
+                        <button class="btn btn-secondary">-</button>
+                        <input type="text" class="mx-2" style="width: 30px;">
+                        <button class="btn btn-secondary">+</button>
+                    </div>
+                    <button class="btn btn-primary mt-1" style="width: 100px">Buy</button>
+                </div>
+
+
+            </div>
+        </div>
     </main>
 
     <?php

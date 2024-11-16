@@ -32,8 +32,21 @@
     min-height: 150px;
 }
 
-@media (max-width: 768px){
+.detailed-event{
+    width: 50%;
+}
+
+@media (max-width: 576px){
     .index-card-body{
         min-height: 200px;
+    }
+
+    .detailed-event{
+        width: 90%;
+    }
+}
+@media (min-width: 577px) and (max-width: 768px){
+    .detailed-event{
+        width: 70%;
     }
 }
