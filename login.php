@@ -14,30 +14,7 @@
 <body>
     <main>
 
-        <section class="sign-up-form d-flex justify-content-center align-items-center">
-            <!-- <div class="container-sm">
-                <form action="" class="border" style="background-color: white;">
-                    <img src="public/images/ticket-logo_9850-381.png" class="row" alt="">
-                    <div class="row">
-                        <label for="first-name" class="form-label">First Name</label>
-                        <div class="input-group">
-                            <input type="text" name="first-name" id="">
-                        </div>
-                        <label for="last-name" class="form-label">Last Name</label>
-                        <div class="input-group">
-                            <input type="text" name="last-name" id="">
-                        </div>
-                    </div>
-                    <label for="email" class="form-label">Email</label>
-                    <div class="input-group">
-                        <input type="text" name="email" id="">
-                    </div>
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" name="password">
-                    </div>
-                </form>
-            </div> -->
+        <section class="login-form d-flex justify-content-center align-items-center">
             <div class="form-container border d-flex flex-column justify-content-center align-items-center">
                 <img src="public/images/ticket-logo_9850-381.png" class="form-logo img-fluid" alt="Logo" class="logo">
                 <form style="width: 400px; padding: 0px 10px 0 10px;">

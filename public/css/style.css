@@ -43,6 +43,13 @@
     background-repeat: no-repeat;
     z-index: -100;
 }
+.login-form {
+    height: 100vh;
+    background-image: url('../images/tyler-clemmensen-GjIOvAAdqew-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -100;
+}
 
 .form-container{
     width: 400px;
