@@ -36,6 +36,28 @@
     width: 50%;
 }
 
+.sign-up-form {
+    height: 100vh;
+    background-image: url('../images/yuka-yamazaki-PfBZs461d4w-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -100;
+}
+
+.form-container{
+    max-width: 400px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.form-logo{
+    width: 100px;
+    height: 100px;
+}
+
 @media (max-width: 576px){
     .index-card-body{
         min-height: 200px;
