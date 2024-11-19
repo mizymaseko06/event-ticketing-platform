@@ -65,6 +65,16 @@
     height: 100px;
 }
 
+.event-link{
+    color: black;
+    text-decoration: none;
+}
+
+.event-card:hover{
+    background-color: rgb(224, 224, 224);
+
+}
+
 @media (max-width: 576px){
     .index-card-body{
         min-height: 200px;
