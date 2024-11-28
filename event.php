@@ -38,7 +38,7 @@
                 <div class="quantities d-flex flex-column align-items-center">
                     <div class="">
                         <button class="btn btn-secondary">-</button>
-                        <input type="text" class="mx-2" style="width: 30px;">
+                        <input type="number" inputmode="numeric" class="mx-2" style="width: 50px;">
                         <button class="btn btn-secondary">+</button>
                     </div>
                     <button class="btn btn-primary mt-1" style="width: 100px">Buy</button>

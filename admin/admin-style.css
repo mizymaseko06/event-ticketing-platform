@@ -1,0 +1,32 @@
+body {
+    overflow-x: hidden;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #fff !important;
+}
+
+.hamburger-menu {
+    display: none;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    padding: 20px;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+}

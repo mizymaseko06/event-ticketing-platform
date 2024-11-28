@@ -7,7 +7,7 @@
 
                         <h5 style="color: orange;">Site Map</h5>
                         <div id="site-map" class="d-flex flex-column">
-                            <span><a href="">Events</a></span>
+                            <span><a href="events.php">Events</a></span>
                             <span><a href="">About Us</a></span>
                             <span><a href="">FAQ</a></span>
                             <span><a href="">Privacy Policy</a></span>
