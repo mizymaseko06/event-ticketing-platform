@@ -18,13 +18,13 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.php#how-it-works">How It Works</a>
                         </li>
-
-                        </li>
                     </ul>
 
                     <div class="d-flex align-content-center">
                         <p class="nav-item white-text">My tickets</p>
                         <p class="nav-item white-text">E200.00</p>
+                        <p class="nav-item white-text"><a href="scripts/logout.php">Logout</a></p>
+
                     </div>
                 </div>
             </div>
