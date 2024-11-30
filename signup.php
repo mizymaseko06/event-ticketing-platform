@@ -1,3 +1,6 @@
+<?php
+include_once 'db/db_conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,49 +18,27 @@
     <main>
 
         <section class="sign-up-form d-flex justify-content-center align-items-center">
-            <!-- <div class="container-sm">
-                <form action="" class="border" style="background-color: white;">
-                    <img src="public/images/ticket-logo_9850-381.png" class="row" alt="">
-                    <div class="row">
-                        <label for="first-name" class="form-label">First Name</label>
-                        <div class="input-group">
-                            <input type="text" name="first-name" id="">
-                        </div>
-                        <label for="last-name" class="form-label">Last Name</label>
-                        <div class="input-group">
-                            <input type="text" name="last-name" id="">
-                        </div>
-                    </div>
-                    <label for="email" class="form-label">Email</label>
-                    <div class="input-group">
-                        <input type="text" name="email" id="">
-                    </div>
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input type="password" name="password">
-                    </div>
-                </form>
-            </div> -->
+
             <div class="form-container border d-flex flex-column justify-content-center align-items-center">
                 <img src="public/images/ticket-logo_9850-381.png" class="form-logo img-fluid" alt="Logo" class="logo">
-                <form>
+                <form action="scripts/process-sign-up.php" method="POST">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="firstName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter your name" required>
+                            <input name="name" type="text" class="form-control" id="firstName" placeholder="Enter your name" required>
                         </div>
                         <div class="col">
                             <label for="lastName" class="form-label">Surname</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Enter your surname" required>
+                            <input name="surname" type="text" class="form-control" id="lastName" placeholder="Enter your surname" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Enter your email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
