@@ -40,7 +40,8 @@ include_once 'db/db_conn.php';
                         <label for="password" class="form-label">Password</label>
                         <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    <button type="submit" class="btn btn-primary w-100">Create account</button>
+                    <p style="font-size: smaller; padding-top: 10px;">If you already have an account, <span><a href="login.php">log in here.</a></span></p>
                 </form>
             </div>
 
