@@ -32,6 +32,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Events (
     time TIME NOT NULL,
     location VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) DEFAULT 'images/default_image.jpg',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 

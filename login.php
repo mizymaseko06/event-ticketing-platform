@@ -24,9 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['userID'] = $userID;
             $_SESSION['email'] = $email;
 
-            // Redirect to a dashboard or user homepage
-            header("Location: index.php"); // Change this to the page you want to redirect after login
-            exit();
+            if ($email == "admin@ticket.com") {
+                header("Location: admin/dashboard.php");
+                exit();
+            }
+            else {
+                // Redirect to a dashboard or user homepage
+                header("Location: index.php"); // Change this to the page you want to redirect after login
+                exit();
+            }
         } else {
             // Incorrect password
             $loginError = "Incorrect password. Please try again.";
