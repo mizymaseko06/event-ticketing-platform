@@ -7,7 +7,7 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
-include "../db/db_conn.php";
+include_once "../db/db_conn.php";
 ?>
 
 <!DOCTYPE html>
@@ -76,54 +76,54 @@ include "../db/db_conn.php";
             <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
 
             <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form id="eventForm" method="POST" enctype="multipart/form-data" action="../scripts/add-event.php">
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="eventImage" class="form-label">Event Image</label>
-                    <input type="file" class="form-control" id="eventImage" name="eventImage" accept="image/*">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="eventForm" method="POST" enctype="multipart/form-data" action="../scripts/add-event.php">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="eventImage" class="form-label">Event Image</label>
+                                    <input type="file" class="form-control" id="eventImage" name="eventImage" accept="image/*">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventName" class="form-label">Event Name</label>
+                                    <input type="text" class="form-control" id="eventName" name="eventName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="eventDescription" name="eventDescription" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventDate" class="form-label">Date</label>
+                                    <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventTime" class="form-label">Time</label>
+                                    <input type="time" class="form-control" id="eventTime" name="eventTime" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventLocation" class="form-label">Location</label>
+                                    <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventPrice" class="form-label">Ticket Price</label>
+                                    <input type="number" class="form-control" id="eventPrice" name="eventPrice" step="0.01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ticketQty" class="form-label">Ticket Quantity</label>
+                                    <input type="number" class="form-control" id="ticketQty" name="ticketQty" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Event</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="eventName" class="form-label">Event Name</label>
-                    <input type="text" class="form-control" id="eventName" name="eventName" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="eventDescription" name="eventDescription" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="eventDate" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="eventDate" name="eventDate" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventTime" class="form-label">Time</label>
-                    <input type="time" class="form-control" id="eventTime" name="eventTime" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventLocation" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventPrice" class="form-label">Ticket Price</label>
-                    <input type="number" class="form-control" id="eventPrice" name="eventPrice" step="0.01" required>
-                </div>
-                <div class="mb-3">
-                    <label for="ticketQty" class="form-label">Ticket Quantity</label>
-                    <input type="number" class="form-control" id="ticketQty" name="ticketQty" required>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Event</button>
-            </div>
-        </form>
-    </div>
-</div>
 
             </div>
             <div class="table-responsive">
@@ -133,13 +133,52 @@ include "../db/db_conn.php";
                             <th>Name</th>
                             <th>Date</th>
                             <th>Location</th>
+                            <th>Tickets Qty</th>
                             <th>Tickets Sold</th>
-                            <th>Tickets Left</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="events-table">
-                        <!-- Rows populated dynamically -->
+                        <?php
+                        $sql = "SELECT eventID, eventName, date, location, ticketQty FROM Events";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Output data for each row
+                            while ($row = $result->fetch_assoc()) {
+                                // echo "Event Name: " . htmlspecialchars($row['eventName']) . "<br>";
+                                // echo "Date: " . htmlspecialchars($row['date']) . "<br>";
+                                // echo "Location: " . htmlspecialchars($row['location']) . "<br>";
+                                // echo "Location: " . htmlspecialchars($row['ticketQty']) . "<br>";
+                                // echo "<hr>";
+                        ?> <tr>
+                                    <td><?php echo htmlspecialchars($row['eventName']) ?></td>
+                                    <td><?php echo htmlspecialchars($row['date']) ?></td>
+                                    <td><?php echo htmlspecialchars($row['location']) ?></td>
+                                    <td><?php echo htmlspecialchars($row['ticketQty']) ?></td>
+                                    <td>0</td>
+
+                                    <td>
+                                        <form method='POST' action='../scripts/delete-event.php' style='display:inline;'>
+                                            <input type='hidden' name='eventID' value='<?php echo htmlspecialchars($row['eventID']);  ?>'>
+                                            <button type='submit' class='btn btn-danger btn-sm'>Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                            <tr>
+                                <td colspan="6" class="text-center" style="font-size: 50px;">No events found</td>
+                            </tr>
+
+
+                        <?php
+                        }
+                        ?>
+
+
                     </tbody>
                 </table>
             </div>
@@ -147,7 +186,7 @@ include "../db/db_conn.php";
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script>
         // Show section based on tab click
@@ -159,48 +198,6 @@ include "../db/db_conn.php";
             } else if (section === 'event-management') {
                 document.getElementById('event-management-section').classList.remove('d-none');
             }
-        }
-
-        // Example Dynamic Data Fetching (Simulated)
-        window.onload = function() {
-            // Simulate fetching statistics
-            document.getElementById('total-events').innerText = 10;
-            document.getElementById('total-users').innerText = 500;
-            document.getElementById('total-tickets-sold').innerText = 1000;
-            document.getElementById('revenue-summary').innerText = "$50,000";
-
-            // Simulate fetching event data
-            const events = [{
-                    name: "Music Festival",
-                    date: "2024-11-30",
-                    location: "City Park",
-                    sold: 200,
-                    left: 50
-                },
-                {
-                    name: "Tech Conference",
-                    date: "2024-12-15",
-                    location: "Tech Hub",
-                    sold: 150,
-                    left: 20
-                },
-            ];
-
-            const eventsTable = document.getElementById('events-table');
-            events.forEach(event => {
-                const row = `<tr>
-                    <td>${event.name}</td>
-                    <td>${event.date}</td>
-                    <td>${event.location}</td>
-                    <td>${event.sold}</td>
-                    <td>${event.left}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
-                </tr>`;
-                eventsTable.innerHTML += row;
-            });
         }
     </script>
 </body>
