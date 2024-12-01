@@ -76,50 +76,55 @@ include "../db/db_conn.php";
             <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
 
             <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form id="eventForm" method="POST" enctype="multipart/form-data" action="../scripts/add-event.php">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="eventImage" class="form-label">Event Image</label>
-                                    <input type="file" class="form-control" id="eventImage" name="eventImage" accept="image/*">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventName" class="form-label">Event Name</label>
-                                    <input type="text" class="form-control" id="eventName" name="eventName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="eventDescription" name="eventDescription" rows="3" required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventDate" class="form-label">Date</label>
-                                    <input type="date" class="form-control" id="eventDate" name="eventDate" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventTime" class="form-label">Time</label>
-                                    <input type="time" class="form-control" id="eventTime" name="eventTime" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventLocation" class="form-label">Location</label>
-                                    <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="eventPrice" class="form-label">Ticket Price</label>
-                                    <input type="number" class="form-control" id="eventPrice" name="eventPrice" step="0.01" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add Event</button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="eventForm" method="POST" enctype="multipart/form-data" action="../scripts/add-event.php">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="eventImage" class="form-label">Event Image</label>
+                    <input type="file" class="form-control" id="eventImage" name="eventImage" accept="image/*">
                 </div>
+                <div class="mb-3">
+                    <label for="eventName" class="form-label">Event Name</label>
+                    <input type="text" class="form-control" id="eventName" name="eventName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="eventDescription" name="eventDescription" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="eventDate" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventTime" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="eventTime" name="eventTime" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventLocation" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventPrice" class="form-label">Ticket Price</label>
+                    <input type="number" class="form-control" id="eventPrice" name="eventPrice" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ticketQty" class="form-label">Ticket Quantity</label>
+                    <input type="number" class="form-control" id="ticketQty" name="ticketQty" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Event</button>
+            </div>
+        </form>
+    </div>
+</div>
+
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">

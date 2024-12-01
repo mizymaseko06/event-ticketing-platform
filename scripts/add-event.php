@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventTime = mysqli_real_escape_string($conn, $_POST['eventTime']);
     $eventLocation = mysqli_real_escape_string($conn, $_POST['eventLocation']);
     $eventPrice = mysqli_real_escape_string($conn, $_POST['eventPrice']);
+    $ticketQty = mysqli_real_escape_string($conn, $_POST['ticketQty']);
 
     // Handle optional file upload
     $imagePath = 'images/default_image.jpg'; // Default image
@@ -25,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert data into Events table
-    $sql = "INSERT INTO Events (eventName, description, date, time, location, price, image, created_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+    $sql = "INSERT INTO Events (eventName, description, ticketQty, date, time, location, price, image, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $eventName, $eventDescription, $eventDate, $eventTime, $eventLocation, $eventPrice, $imagePath);
+    $stmt->bind_param("ssisssss", $eventName, $eventDescription, $ticketQty, $eventDate, $eventTime, $eventLocation, $eventPrice, $imagePath);
 
     if ($stmt->execute()) {
         echo "<script>alert('Event added successfully!'); window.location.href = '../admin/dashboard.php';</script>";

@@ -28,6 +28,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Events (
     eventID INT AUTO_INCREMENT PRIMARY KEY,
     eventName VARCHAR(150) NOT NULL,
     description TEXT,
+    ticketQty INT NOT NULL,
     date DATE NOT NULL,
     time TIME NOT NULL,
     location VARCHAR(255) NOT NULL,
