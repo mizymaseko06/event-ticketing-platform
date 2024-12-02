@@ -17,7 +17,7 @@ include_once "../db/db_conn.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="admin-style.css">
     <style>
@@ -26,8 +26,8 @@ include_once "../db/db_conn.php";
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Admin Dashboard</a>
             <button class="navbar-toggler hamburger-menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -53,7 +53,7 @@ include_once "../db/db_conn.php";
         </div>
     </nav>
 
-    <!-- Main Content -->
+    
     <div class="container mt-4">
         <?php
         // Query to get total events
@@ -228,9 +228,9 @@ include_once "../db/db_conn.php";
 
     </div>
 
-    <!-- Bootstrap JS -->
+    
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+    
     <script>
         // Show section based on tab click
         function showSection(section) {

@@ -1,19 +1,19 @@
 <?php
-session_start();
-include "db/db_conn.php"; // Ensure this includes your database connection
-// Check if the user is logged in
+
+include "db/db_conn.php";
+
 if (isset($_SESSION['userID'])) {
     $userID = $_SESSION['userID'];
-    // Query the database to retrieve the user's balance
-    $sql = "SELECT balance FROM users WHERE userID = ?";
+
+    $sql = "SELECT balance, email FROM users WHERE userID = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $userID);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $balance);
+    mysqli_stmt_bind_result($stmt, $balance, $email);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
 } else {
-    // Default balance if the user is not logged in
+    
     $balance = 0;
 }
 ?>
@@ -40,6 +40,9 @@ if (isset($_SESSION['userID'])) {
                 </ul>
 
                 <div class="d-flex flex-column flex-lg-row text-center">
+                    <p class="nav-item text-warning m-2">
+                    <?php echo $email;?>
+                    </p>
                     <p class="nav-item white-text m-2">
                         <a class="text-white" data-bs-toggle="modal" data-bs-target="#myTicketsModal">
                             My Tickets
@@ -53,4 +56,5 @@ if (isset($_SESSION['userID'])) {
             </div>
         </div>
     </nav>
+    
 </header>

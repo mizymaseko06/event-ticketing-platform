@@ -158,7 +158,6 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 
-
     <?php
     include "footer.php";
     ?>
