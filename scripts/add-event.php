@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ticketQty = mysqli_real_escape_string($conn, $_POST['ticketQty']);
 
     // Handle optional file upload
-    $imagePath = 'images/default_image.jpg'; // Default image
+    $imagePath = '../public/images/default_image.jpg'; // Default image
     if (isset($_FILES['eventImage']) && $_FILES['eventImage']['error'] === UPLOAD_ERR_OK) {
-        $imageDir = 'uploads/';
+        $imageDir = '../public/images/uploads/';
         if (!is_dir($imageDir)) {
             mkdir($imageDir, 0777, true); // Create directory if it doesn't exist
         }
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imagePath = $imageDir . $imageName;
 
         if (!move_uploaded_file($_FILES['eventImage']['tmp_name'], $imagePath)) {
-            $imagePath = 'images/default_image.jpg'; // Fallback to default if upload fails
+            $imagePath = '../public/images/default_image.jpg'; // Fallback to default if upload fails
         }
     }
 
