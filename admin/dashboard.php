@@ -51,21 +51,47 @@ include_once "../db/db_conn.php";
 
     <!-- Main Content -->
     <div class="container mt-4">
-        <!-- Overview Section -->
+        <?php
+        // Query to get total events
+        $eventsQuery = "SELECT COUNT(*) AS total_events FROM Events";
+        $stmt = $conn->prepare($eventsQuery);
+        $stmt->execute();
+        $stmt->bind_result($totalEvents);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Query to get total users
+        $usersQuery = "SELECT COUNT(*) AS total_users FROM Users";
+        $stmt = $conn->prepare($usersQuery);
+        $stmt->execute();
+        $stmt->bind_result($totalUsers);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Query to get total tickets sold
+        $ticketsQuery = "SELECT COUNT(*) AS total_tickets_sold FROM Registrations";
+        $stmt = $conn->prepare($ticketsQuery);
+        $stmt->execute();
+        $stmt->bind_result($totalTicketsSold);
+        $stmt->fetch();
+        $stmt->close();
+        ?>
+
+
         <div id="overview-section" class="section">
             <h3 class="mb-4">Overview</h3>
             <div class="stats-grid">
                 <div class="stat-card">
                     <h4>Total Events</h4>
-                    <p id="total-events">0</p>
+                    <p id="total-events"><?php echo $totalEvents ?></p>
                 </div>
                 <div class="stat-card">
                     <h4>Total Users</h4>
-                    <p id="total-users">0</p>
+                    <p id="total-users"><?php echo $totalUsers ?></p>
                 </div>
                 <div class="stat-card">
                     <h4>Total Tickets Sold</h4>
-                    <p id="total-tickets-sold">0</p>
+                    <p id="total-tickets-sold"><?php echo $totalTicketsSold ?></p>
                 </div>
             </div>
         </div>
@@ -144,13 +170,9 @@ include_once "../db/db_conn.php";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
-                            // Output data for each row
+
                             while ($row = $result->fetch_assoc()) {
-                                // echo "Event Name: " . htmlspecialchars($row['eventName']) . "<br>";
-                                // echo "Date: " . htmlspecialchars($row['date']) . "<br>";
-                                // echo "Location: " . htmlspecialchars($row['location']) . "<br>";
-                                // echo "Location: " . htmlspecialchars($row['ticketQty']) . "<br>";
-                                // echo "<hr>";
+
                         ?> <tr>
                                     <td><?php echo htmlspecialchars($row['eventName']) ?></td>
                                     <td><?php echo htmlspecialchars($row['date']) ?></td>
