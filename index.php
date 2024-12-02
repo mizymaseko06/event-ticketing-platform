@@ -7,7 +7,7 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
-include "db/db_conn.php";
+include_once "db/db_conn.php";
 
 $sql = "SELECT eventID, eventName, date, time, location, price, image FROM events ORDER BY date ASC LIMIT 6";
 $result = mysqli_query($conn, $sql);
@@ -49,7 +49,7 @@ $result = mysqli_query($conn, $sql);
                     ?>
                         <div class="card col-10 col-md-5 col-lg-3 m-1 event-card">
                             <a href="event.php?id=<?php echo $row['eventID'] ?>" class="event-link">
-                                
+
                                 <img src="<?php echo $row['image'] ?>" class="card-img-top">
                                 <div class="card-body index-card-body d-flex flex-column justify-content-between">
                                     <h5 class="card-title fw-bolder"><?php echo htmlspecialchars($row['eventName']) ?></h5>
@@ -111,6 +111,53 @@ $result = mysqli_query($conn, $sql);
             </div>
         </section>
     </main>
+    <div class="modal fade" id="myTicketsModal" tabindex="-1" aria-labelledby="myTicketsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myTicketsModalLabel">My Tickets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    include_once "db/db_conn.php";
+
+                    $userID = $_SESSION['userID']; // Retrieve the logged-in user ID
+                    $query = "SELECT r.regID, e.eventName, e.date, e.time, e.location 
+                          FROM Registrations r
+                          INNER JOIN Events e ON r.eventID = e.eventID
+                          WHERE r.userID = ?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("i", $userID);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        echo '<ul class="list-group">';
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<li class="list-group-item">';
+                            echo '<strong>Registration ID:</strong> ' . htmlspecialchars($row['regID']) . '<br>';
+                            echo '<strong>Event Name:</strong> ' . htmlspecialchars($row['eventName']) . '<br>';
+                            echo '<strong>Date:</strong> ' . htmlspecialchars($row['date']) . '<br>';
+                            echo '<strong>Time:</strong> ' . htmlspecialchars($row['time']) . '<br>';
+                            echo '<strong>Location:</strong> ' . htmlspecialchars($row['location']);
+                            echo '</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<p>No tickets found.</p>';
+                    }
+
+                    $stmt->close();
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <?php
     include "footer.php";

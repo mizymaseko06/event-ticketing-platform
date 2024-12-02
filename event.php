@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qty'])) {
         $updateBalanceStmt->execute();
 
         // Redirect to a success page or show an alert
-        echo "<script>alert('Purchase successful!');</script>";
+        echo "<script>alert('Purchase successful!'); window.location.href = 'index.php';</script>";
         exit();
     } else {
         // Not enough balance, show an error

@@ -1,25 +1,3 @@
-<?php
-session_start();
-include_once "db/db_conn.php";
-
-// Check if the user is logged in
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-
-    // Query the database to retrieve the user's balance
-    $sql = "SELECT balance FROM users WHERE userID = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $userID);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $balance);
-    mysqli_stmt_fetch($stmt);
-    mysqli_stmt_close($stmt);
-} else {
-    // Default balance if the user is not logged in
-    $balance = 0;
-}
-?>
-
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -43,9 +21,15 @@ if (isset($_SESSION['userID'])) {
                 </ul>
 
                 <div class="d-flex flex-column flex-lg-row text-center">
-                    <p class="nav-item white-text m-2">My tickets</p>
-                    <p class="nav-item white-text m-2">E<?php echo number_format($balance, 2); ?></p>
+                    <p class="nav-item white-text m-2">
+                        <a class="text-white" data-bs-toggle="modal" data-bs-target="#myTicketsModal">
+                            My Tickets
+                        </a>
+                    </p>
+
+                    <p class="nav-item white-text m-2">E200.00</p>
                     <p class="nav-item white-text m-2"><a href="scripts/logout.php">Logout</a></p>
+
                 </div>
             </div>
         </div>
