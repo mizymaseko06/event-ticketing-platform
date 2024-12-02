@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db/db_conn.php"; // Ensure this includes your database connection
+include_once "db/db_conn.php";
 
 // Check if the user is logged in
 if (isset($_SESSION['userID'])) {
@@ -35,7 +35,7 @@ if (isset($_SESSION['userID'])) {
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="events.php">Events</a>
+                        <a class="nav-link active" aria-current="page" href="all_events.php">Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php#how-it-works">How It Works</a>
