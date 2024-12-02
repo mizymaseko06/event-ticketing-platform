@@ -42,6 +42,10 @@ include_once "../db/db_conn.php";
                         <a class="nav-link" href="#" id="event-management-tab" onclick="showSection('event-management')">Event Management</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="top-up-tab" onclick="showSection('top-up')">Top Up User Balance</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="../scripts/logout.php">Logout</a>
                     </li>
                 </ul>
@@ -205,6 +209,23 @@ include_once "../db/db_conn.php";
                 </table>
             </div>
         </div>
+
+        <!-- Top Up User Balance Section -->
+        <div id="top-up-section" class="section d-none">
+            <h3 class="mb-4">Top Up User Balance</h3>
+            <form method="POST" action="../scripts/top-up-balance.php">
+                <div class="mb-3">
+                    <label for="email" class="form-label">User Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount to Add</label>
+                    <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Top Up Balance</button>
+            </form>
+        </div>
+
     </div>
 
     <!-- Bootstrap JS -->
@@ -215,13 +236,17 @@ include_once "../db/db_conn.php";
         function showSection(section) {
             document.getElementById('overview-section').classList.add('d-none');
             document.getElementById('event-management-section').classList.add('d-none');
+            document.getElementById('top-up-section').classList.add('d-none');
             if (section === 'overview') {
                 document.getElementById('overview-section').classList.remove('d-none');
             } else if (section === 'event-management') {
                 document.getElementById('event-management-section').classList.remove('d-none');
+            } else if (section === 'top-up') {
+                document.getElementById('top-up-section').classList.remove('d-none');
             }
         }
     </script>
+
 </body>
 
 </html>
