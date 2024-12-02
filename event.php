@@ -9,6 +9,9 @@ if (!isset($_SESSION['userID'])) {
 
 include "db/db_conn.php";
 
+// Get the user ID from session
+$userID = $_SESSION['userID'];
+
 // Check if event ID is passed in the URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $eventID = $_GET['id'];
@@ -32,6 +35,40 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     header("Location: 404.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qty'])) {
+    $qty = (int)$_POST['qty'];
+    $totalPrice = $event['price'] * $qty;
+
+    // Fetch user's balance from database
+    $balanceStmt = $conn->prepare("SELECT balance FROM users WHERE userID = ?");
+    $balanceStmt->bind_param("i", $userID);
+    $balanceStmt->execute();
+    $balanceResult = $balanceStmt->get_result();
+    $userBalance = $balanceResult->fetch_assoc()['balance'];
+
+    if ($userBalance >= $totalPrice) {
+        // Proceed with the purchase
+        for ($i = 0; $i < $qty; $i++) {
+            $registerStmt = $conn->prepare("INSERT INTO registrations (userID, eventID) VALUES (?, ?)");
+            $registerStmt->bind_param("ii", $userID, $eventID);
+            $registerStmt->execute();
+        }
+
+        // Deduct the balance
+        $newBalance = $userBalance - $totalPrice;
+        $updateBalanceStmt = $conn->prepare("UPDATE users SET balance = ? WHERE userID = ?");
+        $updateBalanceStmt->bind_param("di", $newBalance, $userID);
+        $updateBalanceStmt->execute();
+
+        // Redirect to a success page or show an alert
+        echo "<script>alert('Purchase successful!');</script>";
+        exit();
+    } else {
+        // Not enough balance, show an error
+        echo "<script>alert('Insufficient balance. Please top-up your account.');</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,11 +76,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Event Purchase</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 
 <body>
@@ -65,23 +101,25 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </div>
                 </div>
                 <div class="description mt-3">
-                    <h5>Desciption</h5>
+                    <h5>Description</h5>
                     <p><?php echo nl2br(htmlspecialchars($event['description'])); ?></p>
                 </div>
 
-
-                <div class="quantities d-flex flex-column align-items-center">
-                    <div class="">
-                        <button class="btn btn-secondary">-</button>
-                        <input type="number" inputmode="numeric" class="mx-2" style="width: 50px;">
-                        <button class="btn btn-secondary">+</button>
+                <!-- Ticket Quantity and Purchase Form -->
+                <form action="event.php?id=<?php echo $eventID; ?>" method="POST">
+                    <div class="quantities d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-secondary" id="decreaseQty">-</button>
+                            <input type="number" id="ticketQty" name="qty" value="1" min="1" class="mx-2" style="width: 50px;">
+                            <button type="button" class="btn btn-secondary" id="increaseQty">+</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-1" style="width: 100px">Buy</button>
                     </div>
-                    <button class="btn btn-primary mt-1" style="width: 100px">Buy</button>
-                </div>
-
+                </form>
 
             </div>
         </div>
+
         <section id="similar-events">
             <div class="container">
                 <h2 class="section-heading text-center">
@@ -118,17 +156,29 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         ?>
                     </div>
                 </div>
-
             </div>
-
         </section>
     </main>
 
-    <?php
-    include "footer.php";
-    ?>
+    <?php include "footer.php"; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEu"></script>
+    <script>
+        // JavaScript to handle quantity changes
+        document.getElementById('decreaseQty').addEventListener('click', function() {
+            let qtyInput = document.getElementById('ticketQty');
+            let currentQty = parseInt(qtyInput.value);
+            if (currentQty > 1) {
+                qtyInput.value = currentQty - 1;
+            }
+        });
+
+        document.getElementById('increaseQty').addEventListener('click', function() {
+            let qtyInput = document.getElementById('ticketQty');
+            let currentQty = parseInt(qtyInput.value);
+            qtyInput.value = currentQty + 1;
+        });
+    </script>
 </body>
 
 </html>
