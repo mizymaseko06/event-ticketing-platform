@@ -8,6 +8,9 @@ if (!isset($_SESSION['userID'])) {
 }
 
 include "db/db_conn.php";
+
+$sql = "SELECT eventID, eventName, date, time, location, price, image FROM events ORDER BY date ASC LIMIT 6";
+$result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,21 +45,20 @@ include "db/db_conn.php";
                 </h2>
                 <div class="row justify-content-center">
                     <?php
-                    for ($i = 0; $i < 6; $i++) {
+                    while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                         <div class="card col-10 col-md-5 col-lg-3 m-1 event-card">
-                            <a href="event.php" class="event-link">
-                                <!-- <p class="card-header text-end" style="background-color: white;">Category</p> -->
-                                <img src="public/images/hero-background.jpg" class="card-img-top">
+                            <a href="event.php?id=<?php echo $row['eventID'] ?>" class="event-link">
+                                
+                                <img src="<?php echo $row['image'] ?>" class="card-img-top">
                                 <div class="card-body index-card-body d-flex flex-column justify-content-between">
-                                    <h5 class="card-title fw-bolder">Event</h5>
-                                    <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate in consequuntur, tenetur nulla autem excepturi eius?</p> -->
+                                    <h5 class="card-title fw-bolder"><?php echo htmlspecialchars($row['eventName']) ?></h5>
                                     <div class="details d-flex align-items-end justify-content-between">
                                         <div class="d-flex flex-column">
-                                            <div><i class="bi bi-calendar-event me-1"></i><span class="date" style="font-size: small;">Sat, 30 Nov 2024, 16:00</span></div>
-                                            <div><i class="bi bi-geo me-1"></i><span class="location" style="font-size: small;">Somhlolo National Stadium</span></div>
+                                            <div><i class="bi bi-calendar-event me-1"></i><span class="date" style="font-size: small;"><?php echo date("D, d M Y, H:i", strtotime($row['date'])); ?></span></div>
+                                            <div><i class="bi bi-geo me-1"></i><span class="location" style="font-size: small;"><?php echo htmlspecialchars($row['location']); ?></span></div>
                                         </div>
-                                        <span class="price fw-bold fs-5" style="color: orange">E500.00</span>
+                                        <span class="price fw-bold fs-5" style="color: orange">E<?php echo number_format($row['price'], 2); ?></span>
                                     </div>
                                 </div>
                             </a>
