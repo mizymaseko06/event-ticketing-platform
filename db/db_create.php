@@ -1,14 +1,5 @@
 <?php
-include_once 'db_conn.php';
-
-$sql = "CREATE DATABASE IF NOT EXISTS ticketing_system";
-
-// if (mysqli_query($conn, $sql)) {
-//     echo "Database has either been created successfully or already exists";
-// } else {
-//     die("Error creating db" . mysqli_error($conn));
-// }
-
+// Tables creation
 $sql = "CREATE TABLE IF NOT EXISTS Users(
     userID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -19,12 +10,11 @@ $sql = "CREATE TABLE IF NOT EXISTS Users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
-// if (mysqli_query($conn, $sql)) {
-//     echo "Table 'Users' created successfully.<br/>";
-// } else {
-//     echo "Error creating table 'Users' : " . mysqli_error($conn) . "<br/>";
-// }
-$sql = "CREATE TABLE IF NOT EXISTS Events (
+if ($conn->query($sql) === FALSE) {
+    echo "Error creating table 'Users': " . $conn->error . "<br/>";
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS Events(
     eventID INT AUTO_INCREMENT PRIMARY KEY,
     eventName VARCHAR(150) NOT NULL,
     description TEXT,
@@ -37,11 +27,9 @@ $sql = "CREATE TABLE IF NOT EXISTS Events (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
-// if (mysqli_query($conn, $sql)) {
-//     echo "Table 'Events' created successfully.<br/>";
-// } else {
-//     echo "Error creating table 'Events' : " . mysqli_error($conn) . "<br/>";
-// }
+if ($conn->query($sql) === FALSE) {
+    echo "Error creating table 'Events': " . $conn->error . "<br/>";
+}
 
 $sql = "CREATE TABLE IF NOT EXISTS Registrations(
     regID INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,8 +40,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Registrations(
     FOREIGN KEY (eventID) REFERENCES Events(eventID) ON DELETE CASCADE
 )";
 
-// if (mysqli_query($conn, $sql)) {
-//     echo "Table 'Registrations' created successfully.<br/>";
-// } else {
-//     echo "Error creating table 'Registrations' : " . mysqli_error($conn) . "<br/>";
-// }
+if ($conn->query($sql) === FALSE) {
+    echo "Error creating table 'Registrations': " . $conn->error . "<br/>";
+}
+?>
