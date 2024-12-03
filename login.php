@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "db/db_conn.php";
+include_once "db/db_create.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capture form data

@@ -3,11 +3,11 @@ include_once 'db_conn.php';
 
 $sql = "CREATE DATABASE IF NOT EXISTS ticketing_system";
 
-if (mysqli_query($conn, $sql)) {
-    echo "Database has either been created successfully or already exists";
-} else {
-    die("Error creating db" . mysqli_error($conn));
-}
+// if (mysqli_query($conn, $sql)) {
+//     echo "Database has either been created successfully or already exists";
+// } else {
+//     die("Error creating db" . mysqli_error($conn));
+// }
 
 $sql = "CREATE TABLE IF NOT EXISTS Users(
     userID INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,11 +19,11 @@ $sql = "CREATE TABLE IF NOT EXISTS Users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
-if (mysqli_query($conn, $sql)) {
-    echo "Table 'Users' created successfully.<br/>";
-} else {
-    echo "Error creating table 'Users' : " . mysqli_error($conn) . "<br/>";
-}
+// if (mysqli_query($conn, $sql)) {
+//     echo "Table 'Users' created successfully.<br/>";
+// } else {
+//     echo "Error creating table 'Users' : " . mysqli_error($conn) . "<br/>";
+// }
 $sql = "CREATE TABLE IF NOT EXISTS Events (
     eventID INT AUTO_INCREMENT PRIMARY KEY,
     eventName VARCHAR(150) NOT NULL,
@@ -37,11 +37,11 @@ $sql = "CREATE TABLE IF NOT EXISTS Events (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
-if (mysqli_query($conn, $sql)) {
-    echo "Table 'Events' created successfully.<br/>";
-} else {
-    echo "Error creating table 'Events' : " . mysqli_error($conn) . "<br/>";
-}
+// if (mysqli_query($conn, $sql)) {
+//     echo "Table 'Events' created successfully.<br/>";
+// } else {
+//     echo "Error creating table 'Events' : " . mysqli_error($conn) . "<br/>";
+// }
 
 $sql = "CREATE TABLE IF NOT EXISTS Registrations(
     regID INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,11 +49,11 @@ $sql = "CREATE TABLE IF NOT EXISTS Registrations(
     eventID INT NOT NULL,
     regDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (userID) REFERENCES Users(userID),
-    FOREIGN KEY (eventID) REFERENCES Events(eventID)
+    FOREIGN KEY (eventID) REFERENCES Events(eventID) ON DELETE CASCADE
 )";
 
-if (mysqli_query($conn, $sql)) {
-    echo "Table 'Registrations' created successfully.<br/>";
-} else {
-    echo "Error creating table 'Registrations' : " . mysqli_error($conn) . "<br/>";
-}
+// if (mysqli_query($conn, $sql)) {
+//     echo "Table 'Registrations' created successfully.<br/>";
+// } else {
+//     echo "Error creating table 'Registrations' : " . mysqli_error($conn) . "<br/>";
+// }
