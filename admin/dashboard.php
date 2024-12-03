@@ -6,6 +6,10 @@ if (!isset($_SESSION['userID'])) {
     header("Location: ../login.php");
     exit();
 }
+if($_SESSION['email'] != 'admin@ticket.com'){
+    echo "<script>window.location.href='../error.php';</script>";
+    exit();
+}
 
 include_once "../db/db_conn.php";
 ?>

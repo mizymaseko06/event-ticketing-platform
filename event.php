@@ -16,7 +16,7 @@ $userID = $_SESSION['userID'];
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $eventID = $_GET['id'];
 
-    // Prepare SQL to fetch the event details
+    // Prepare SQL to fetch the event details3
     $stmt = $conn->prepare("SELECT eventName, description, date, time, location, price, image FROM events WHERE eventID = ?");
     $stmt->bind_param("i", $eventID);
     $stmt->execute();
@@ -159,7 +159,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['qty'])) {
             </div>
         </section>
     </main>
+    <div class="modal fade" id="myTicketsModal" tabindex="-1" aria-labelledby="myTicketsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myTicketsModalLabel">My Tickets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    include_once "db/db_conn.php";
 
+                    $userID = $_SESSION['userID']; // Retrieve the logged-in user ID
+                    $query = "SELECT r.regID, e.eventName, e.date, e.time, e.location 
+                          FROM Registrations r
+                          INNER JOIN Events e ON r.eventID = e.eventID
+                          WHERE r.userID = ?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("i", $userID);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        echo '<ul class="list-group">';
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<li class="list-group-item">';
+                            echo '<strong>Registration ID:</strong> ' . htmlspecialchars($row['regID']) . '<br>';
+                            echo '<strong>Event Name:</strong> ' . htmlspecialchars($row['eventName']) . '<br>';
+                            echo '<strong>Date:</strong> ' . htmlspecialchars($row['date']) . '<br>';
+                            echo '<strong>Time:</strong> ' . htmlspecialchars($row['time']) . '<br>';
+                            echo '<strong>Location:</strong> ' . htmlspecialchars($row['location']);
+                            echo '</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<p>No tickets found.</p>';
+                    }
+
+                    $stmt->close();
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php include "footer.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEu"></script>
